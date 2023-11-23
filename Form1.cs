@@ -16,22 +16,21 @@ namespace VsCorder
         {
             InitializeComponent();
         }
+        bool recording = false;
 
 
-        private void button1_Click(object sender, EventArgs e)
+
+        private void button3_MouseMove(object sender, MouseEventArgs e)
         {
-            if (button1.Text == "Start")
-            {
-                button1.Text = "Stop";
-                button1.BackColor = Color.DarkRed;
-                button1.ForeColor = Color.Black;
-            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if(!recording)
+                button3.BackgroundImage = Properties.Resources.record_button_removebg_preview;
             else
-            {
-                button1.Text = "Start";
-                button1.BackColor = System.Drawing.Color.FromArgb(64, 64, 64);
-                button1.ForeColor = Color.Silver;
-            }
+                button3.BackgroundImage = Properties.Resources.record_button_not_press_removebg_preview;
+            recording=!recording;
         }
     }
 }

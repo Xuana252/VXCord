@@ -31,11 +31,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button3 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.button3 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -47,7 +47,9 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
+            this.tabControl1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(800, 457);
             this.tabControl1.TabIndex = 0;
@@ -67,6 +69,22 @@
             this.tabPage1.Size = new System.Drawing.Size(792, 428);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Record";
+            // 
+            // button3
+            // 
+            this.button3.BackgroundImage = global::VsCorder.Properties.Resources.record_button_not_press_removebg_preview;
+            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Location = new System.Drawing.Point(8, 370);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(45, 45);
+            this.button3.TabIndex = 8;
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button3.MouseMove += new System.Windows.Forms.MouseEventHandler(this.button3_MouseMove);
             // 
             // label1
             // 
@@ -92,36 +110,10 @@
             this.button2.ForeColor = System.Drawing.Color.Silver;
             this.button2.Location = new System.Drawing.Point(661, 375);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(109, 40);
+            this.button2.Size = new System.Drawing.Size(132, 61);
             this.button2.TabIndex = 6;
             this.button2.Text = "Take Scrshot";
             this.button2.UseVisualStyleBackColor = false;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(792, 428);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Setting";
-            // 
-            // button3
-            // 
-            this.button3.BackgroundImage = global::VsCorder.Properties.Resources.record_button_not_press_removebg_preview;
-            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(8, 370);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(45, 45);
-            this.button3.TabIndex = 8;
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            this.button3.MouseMove += new System.Windows.Forms.MouseEventHandler(this.button3_MouseMove);
             // 
             // pictureBox1
             // 
@@ -134,6 +126,16 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(792, 428);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Setting";
             // 
             // Form1
             // 

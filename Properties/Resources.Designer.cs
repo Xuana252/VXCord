@@ -63,6 +63,16 @@ namespace VsCorder.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap default_scr {
+            get {
+                object obj = ResourceManager.GetObject("default scr", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap record_button_not_press_removebg_preview {
             get {
                 object obj = ResourceManager.GetObject("record_button_not_press-removebg-preview", resourceCulture);

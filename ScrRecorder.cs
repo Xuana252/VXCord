@@ -1,8 +1,6 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -10,7 +8,7 @@ using System.Runtime.InteropServices;
 using System.IO;
 
 using Accord.Video.FFMPEG;
-using System.Windows.Forms;
+
 
 namespace VsCorder
 {
@@ -26,7 +24,7 @@ namespace VsCorder
         //Cac bien lien quan den file
         private string audioName = "mic.wav";//ten file audio
         private string videoName = "video.mp4";//ten file video
-        private string finalName = "finalvideo.mp4";//ten file video sau khi da ghep 2 file video va audio lai thanh 1
+        public string finalName = "finalvideo.mp4";//ten file video sau khi da ghep 2 file video va audio lai thanh 1
 
         //su dung stopwatch de lien tuc chup man hinh moi lan tick
         private Stopwatch stopwatch = new Stopwatch();
@@ -66,27 +64,23 @@ namespace VsCorder
         public void DeletePath(string targetDir)
         {
             string[] files=Directory.GetFiles(targetDir);
-            string[] dirs=Directory.GetDirectories(targetDir);
+            
 
             foreach (string file in files)
             {
                 File.SetAttributes(file, FileAttributes.Normal);
                 File.Delete(file); 
             }
-            foreach (string dir in dirs)
-            {
-                DeletePath(dir);
-            }
-            Directory.Delete(targetDir,false);
+            
         }
 
         //vi san pham sau cung chi can 1 file mp4 da ghep tu 2 file audio va video nen can them 1 method de xoa 2 file du thua do ngoai tru file san pham cuoi cung
-        public void DeleteFileExcept(string targetDir,string excpetFile)
+        public void DeleteFile(string targetDir,string AudioDelete,string VideoDelete )
         {
             string[] files= Directory.GetFiles(targetDir);
             foreach(string file in files)
             {
-                if(file != excpetFile)
+                if(file == AudioDelete||file==VideoDelete)
                 {
                     File.SetAttributes(file,FileAttributes.Normal);
                     File.Delete(file);
@@ -96,10 +90,19 @@ namespace VsCorder
         //Tu dong xoa cac file anh chup man hinh neu nhu nguoi dung bat ngo thoat khoi chuong trinh trong qua trinh dang quay video
         public void CleanUp()
         {
-            if(Directory.Exists(tempPath))
+            string[] files = Directory.GetFiles(tempPath);
+            string[] dir = Directory.GetDirectories(tempPath);
+
+            foreach (string file in files)
             {
-                DeletePath(tempPath);
+                File.SetAttributes(file, FileAttributes.Normal);
+                File.Delete(file);
             }
+            foreach(string file in dir)
+            {
+                Directory.Delete(file);
+            } 
+            Directory.Delete(tempPath);
         }
 
         public string GetElapsed()
@@ -139,11 +142,11 @@ namespace VsCorder
         {
             using(VideoFileWriter vFWriter=new VideoFileWriter()) 
             {
-                vFWriter.Open(outputPath + "//" + videoName, width, height, framerate, VideoCodec.MPEG4);
+                vFWriter.Open(outputPath + "//" + videoName, width, height, framerate, VideoCodec.MPEG2,6000000);
 
                 foreach(string imagelocation in inputImageSequence)
                 {
-                    Bitmap imageFrame = System.Drawing.Image.FromFile(imagelocation) as Bitmap;
+                    Bitmap imageFrame = Image.FromFile(imagelocation) as Bitmap;
                     vFWriter.WriteVideoFrame(imageFrame);
                     imageFrame.Dispose();
                 }
@@ -186,7 +189,7 @@ namespace VsCorder
 
             int width = bounds.Width;
             int height = bounds.Height;
-            int frameRate = 10;
+            int frameRate = inputImageSequence.Count/((int)stopwatch.Elapsed.TotalMilliseconds/1000);
 
             SaveAudio();
             
@@ -194,11 +197,27 @@ namespace VsCorder
 
             CombineVideoAudio(videoName, audioName);
 
+            stopwatch = new Stopwatch();
+
             DeletePath(tempPath);
 
-            DeleteFileExcept(outputPath, outputPath + "\\" + finalName);
+            inputImageSequence.Clear();
 
+            DeleteFile(outputPath, outputPath + "\\" + audioName, outputPath + "\\" + videoName);
+        }
 
+        public void TakeScrShots(string name)
+        {
+            using (Bitmap bitmap = new Bitmap(bounds.Width, bounds.Height))
+            {
+                using (Graphics g = Graphics.FromImage(bitmap))
+                {
+                    g.CopyFromScreen(new Point(bounds.Left, bounds.Top), Point.Empty, bounds.Size);
+                }
+                
+                bitmap.Save(name, ImageFormat.Png);
+            }
+            
         }
 
     }
